@@ -1,0 +1,33 @@
+{
+  "Error": {
+    "GoBack": "ALLER Retour",
+    "NotFoundTitle": "404 - Page introuvable",
+    "NotFoundMessage": "La page que vous recherchez n'existe pas."
+  },
+  "Header": {
+    "languageLabel": "Langue"
+  },
+  "HomePage": {
+    "HomePageTitle": "Liste des utilisateurs",
+    "searchPlaceholder": "Rechercher par nom ou par email...",
+    "UserTable": {
+      "id": "IDENTIFIANT",
+      "name": "Nom",
+      "username": "Nom d'utilisateur",
+      "email": "E-mail",
+      "cityZip": "Ville / Code postal",
+      "phone": "Téléphone",
+      "company": "Entreprise",
+      "noItems": "Aucun utilisateur trouvé.",
+      "pagination": {
+        "showing": "Affichage",
+        "of": "de",
+        "first": "D'abord",
+        "prev": "Précédente",
+        "next": "Suivante",
+        "last": "Dernière",
+        "page": "Page"
+      }
+    }
+  }
+}

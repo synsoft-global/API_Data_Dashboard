@@ -1,0 +1,33 @@
+{
+  "Error": {
+    "GoBack": "GO Back",
+    "NotFoundTitle": "404 - Page Not Found",
+    "NotFoundMessage": "The page you are looking for does not exist."
+  },
+  "Header": {
+    "languageLabel": "Language"
+  },
+  "HomePage": {
+    "HomePageTitle": "Users List",
+    "searchPlaceholder": "Search by name or email...",
+    "UserTable": {
+      "id": "ID",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "cityZip": "City / Zip",
+      "phone": "Phone",
+      "company": "Company",
+      "noItems": "No users found.",
+      "pagination": {
+        "showing": "Showing",
+        "of": "of",
+        "first": "First",
+        "prev": "Prev",
+        "next": "Next",
+        "last": "Last",
+        "page": "Page"
+      }
+    }
+  }
+}

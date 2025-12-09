@@ -1,4 +1,3 @@
-// hooks/useUserColumns.ts
 'use client'
 
 import React, { useMemo } from 'react'
@@ -7,8 +6,11 @@ import { UserDTO } from '@/dto'
 import { useLocale, useTranslations } from 'next-intl'
 
 export function useUserColumns() {
+  // Get current locale and translations
   const locale = useLocale()
   const t = useTranslations('HomePage.UserTable')
+
+  // Define table columns configuration
   const columns = useMemo<ColumnDef<UserDTO>[]>(
     () => [
       {
@@ -27,6 +29,7 @@ export function useUserColumns() {
         header: t('username'),
       },
       {
+        // Email column with mailto link
         accessorKey: 'email',
         header: t('email'),
         cell: (info) => (
@@ -36,6 +39,7 @@ export function useUserColumns() {
         ),
       },
       {
+        // Combined city and zip code column
         accessorFn: (row) => `${row.address.city}, ${row.address.zipcode}`,
         id: 'city',
         header: t('cityZip'),
@@ -45,6 +49,7 @@ export function useUserColumns() {
         header: t('phone'),
       },
       {
+        // Company name from nested object
         accessorFn: (row) => row.company.name,
         id: 'company',
         header: t('company'),

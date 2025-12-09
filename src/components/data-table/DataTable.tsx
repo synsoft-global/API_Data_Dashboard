@@ -1,9 +1,8 @@
-// components/DataTable.tsx
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, useReactTable, SortingState } from '@tanstack/react-table'
-import { Card, CardContent } from '@/components/ui/card' // shadcn card import path - adapt if different
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 
@@ -11,13 +10,14 @@ type DataTableProps<T> = {
   data: T[]
   columns: ColumnDef<T, any>[]
   initialSort?: SortingState
-  pageSize?: number // client-side simple paging
+  pageSize?: number
 }
 
 export default function DataTable<T>({ data, columns, initialSort = [], pageSize = 10 }: DataTableProps<T>) {
-  const [sorting, setSorting] = React.useState<SortingState>(initialSort)
-  const [pageIndex, setPageIndex] = React.useState(0)
+  const [sorting, setSorting] = useState<SortingState>(initialSort)
+  const [pageIndex, setPageIndex] = useState(0)
   const userTableT = useTranslations('HomePage.UserTable')
+  const commonT = useTranslations('common.pagination')
 
   const table = useReactTable({
     data,
@@ -90,30 +90,24 @@ export default function DataTable<T>({ data, columns, initialSort = [], pageSize
         {/* Pagination controls (simple) */}
         <div className="flex items-center justify-between gap-3 mt-3 flex-col md:flex-row">
           <div className="text-sm text-muted-foreground">
-            {userTableT('pagination.showing')}
+            {commonT('showing')}
             <strong>
               {Math.min(data.length, pageIndex * pageSize + 1)}-{Math.min(data.length, pageIndex * pageSize + visibleRows.length)}
             </strong>{' '}
-            {userTableT('pagination.of')}
+            {commonT('of')}
             <strong>{data.length}</strong>
           </div>
 
           <div className="flex items-center gap-2 ">
-            {/* <Button variant="outline" size="sm" onClick={() => setPageIndex(0)} disabled={pageIndex === 0}>
-              {userTableT('pagination.first')}
-            </Button> */}
             <Button variant="outline" size="sm" onClick={() => setPageIndex((p) => Math.max(0, p - 1))} disabled={pageIndex === 0}>
-              {userTableT('pagination.prev')}
+              {commonT('prev')}
             </Button>
             <span className="text-sm px-2">
-              {userTableT('pagination.page')} {pageIndex + 1} / {totalPages}
+              {commonT('page')} {pageIndex + 1} / {totalPages}
             </span>
             <Button variant="outline" size="sm" onClick={() => setPageIndex((p) => Math.min(totalPages - 1, p + 1))} disabled={pageIndex >= totalPages - 1}>
-              {userTableT('pagination.next')}
+              {commonT('next')}
             </Button>
-            {/* <Button variant="outline" size="sm" onClick={() => setPageIndex(totalPages - 1)} disabled={pageIndex >= totalPages - 1}>
-              {userTableT('pagination.last')}
-            </Button> */}
           </div>
         </div>
       </CardContent>

@@ -1,11 +1,14 @@
 'use client'
 
-import React from 'react'
+import React, { use } from 'react'
 import { Loader2 } from 'lucide-react' // optional, shadcn icon
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { RenderContentProps } from './RenderContent.type'
+import { useTranslations } from 'next-intl'
 
 export default function RenderContent({ isLoading = false, isFetching = false, isError = false, error, children }: RenderContentProps) {
+  const errorT = useTranslations('Error')
+
   // Loading UI
   if (isLoading || isFetching) {
     return (
@@ -19,8 +22,8 @@ export default function RenderContent({ isLoading = false, isFetching = false, i
   if (isError) {
     return (
       <Alert variant="destructive" className="my-4">
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>{error?.message || 'Something went wrong while fetching data.'}</AlertDescription>
+        <AlertTitle>{errorT('ErrorTitle')}</AlertTitle>
+        <AlertDescription>{error?.message || errorT('ErrorMessage')}</AlertDescription>
       </Alert>
     )
   }

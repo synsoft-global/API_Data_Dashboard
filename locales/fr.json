@@ -1,5 +1,19 @@
 {
+  "common": {
+    "search": "Recherche",
+    "pagination": {
+      "first": "D'abord",
+      "prev": "Précédente",
+      "next": "Suivante",
+      "last": "Dernière",
+      "page": "Page",
+      "showing": "Affichage",
+      "of": "de"
+    }
+  },
   "Error": {
+    "ErrorTitle": "Une erreur s'est produite",
+    "ErrorMessage": "Désolé, quelque chose s'est mal passé.",
     "GoBack": "ALLER Retour",
     "NotFoundTitle": "404 - Page introuvable",
     "NotFoundMessage": "La page que vous recherchez n'existe pas."
@@ -18,16 +32,7 @@
       "cityZip": "Ville / Code postal",
       "phone": "Téléphone",
       "company": "Entreprise",
-      "noItems": "Aucun utilisateur trouvé.",
-      "pagination": {
-        "showing": "Affichage",
-        "of": "de",
-        "first": "D'abord",
-        "prev": "Précédente",
-        "next": "Suivante",
-        "last": "Dernière",
-        "page": "Page"
-      }
+      "noItems": "Aucun utilisateur trouvé."
     }
   }
 }

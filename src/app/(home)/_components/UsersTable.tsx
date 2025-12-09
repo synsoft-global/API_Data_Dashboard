@@ -1,50 +1,33 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import DataTable from '@/components/data-table/DataTable'
 import RenderContent from '@/components/render-content/RenderContent'
 
 import SearchInput from '@/components/search/SearchInput'
-import { useDebouncedValue } from '@/hooks/useDebouncedValue'
-
 import { UserDTO } from '@/dto'
-import { useUserListQuery } from '@/redux/api/users.api'
-import { useUserColumns } from './useUserColumns.hook'
 import { useTranslations } from 'next-intl'
+import { extractUserArray } from '@/utils'
+import { useUserColumns } from './useUserColumns.hook'
+import { useUserListQuery } from '@/redux/api/users.api'
+import { useDebouncedValue } from '@/hooks/useDebouncedValue'
 
 export default function UsersTable() {
   const homePageT = useTranslations('HomePage')
   const columns = useUserColumns()
 
+  // Fetch user data from API
   const { isFetching, isLoading, isError, data } = useUserListQuery()
 
-  const [search, setSearch] = React.useState('')
+  // Search input state and debounced value
+  const [search, setSearch] = useState('')
   const debouncedSearch = useDebouncedValue(search, 150)
 
-  const rawArray = React.useMemo<UserDTO[]>(() => {
-    if (!data) return []
-    if (Array.isArray(data)) return data as UserDTO[]
+  // Extract user array from various data structures
+  const rawArray = useMemo<UserDTO[]>(() => extractUserArray(data), [data])
 
-    if ((data as any).users && Array.isArray((data as any).users)) {
-      return (data as any).users as UserDTO[]
-    }
-    if ((data as any).data && Array.isArray((data as any).data)) {
-      return (data as any).data as UserDTO[]
-    }
-
-    const values = Object.values(data)
-    for (const v of values) {
-      if (Array.isArray(v)) return v as UserDTO[]
-    }
-
-    return []
-  }, [data])
-
-  // useEffect(() => {
-  //   console.debug('[UsersTable] rawArray length:', rawArray.length, 'search:', search)
-  // }, [rawArray.length, search])
-
-  const filteredData = React.useMemo<UserDTO[]>(() => {
+  // Filter users by name or email based on search query
+  const filteredData = useMemo<UserDTO[]>(() => {
     if (!rawArray || rawArray.length === 0) return []
 
     const q = (debouncedSearch || '').trim().toLowerCase()
@@ -57,10 +40,12 @@ export default function UsersTable() {
     })
   }, [rawArray, debouncedSearch])
 
+  // Generate unique key for table re-rendering
   const tableKey = useMemo(() => `users-${rawArray.length}-${filteredData.length}-${String(isLoading)}`, [rawArray.length, filteredData.length, isLoading])
 
   return (
     <div className="space-y-4 ">
+      {/* Header with title and search input */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <h2 className="text-lg font-semibold">{homePageT('HomePageTitle')}</h2>
 
@@ -69,6 +54,7 @@ export default function UsersTable() {
         </div>
       </div>
 
+      {/* Table with loading/error states */}
       <RenderContent isLoading={isLoading} isFetching={isFetching} isError={isError}>
         {filteredData.length === 0 ? (
           <div className="py-6 text-center text-sm text-muted-foreground">{homePageT('UserTable.noItems')}</div>

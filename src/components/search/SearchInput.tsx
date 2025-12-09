@@ -5,12 +5,14 @@ import { Label } from '@/components/ui/label'
 import { X, Search } from 'lucide-react'
 
 import { SearchInputProps } from './SearchInput.type'
+import { useTranslations } from 'next-intl'
 
-export default function SearchInput({ value, onChange, placeholder = 'Search...', id = 'search-input', className = '', showClearButton = true }: SearchInputProps) {
+export default function SearchInput({ value, onChange, placeholder = '', id = 'search-input', className = '', showClearButton = true }: SearchInputProps) {
+  const commonT = useTranslations('common')
   return (
     <div className={`relative ${className}`}>
       <Label htmlFor={id} className="sr-only">
-        Search
+        {commonT('search')}
       </Label>
 
       {/* Search Icon */}

@@ -1,5 +1,19 @@
 {
+  "common": {
+    "search": "Search",
+    "pagination": {
+      "first": "First",
+      "prev": "Previous",
+      "next": "Next",
+      "last": "Last",
+      "page": "Page",
+      "showing": "Showing",
+      "of": "of"
+    }
+  },
   "Error": {
+    "ErrorTitle": "An Error Occurred",
+    "ErrorMessage": "Sorry, something went wrong.",
     "GoBack": "GO Back",
     "NotFoundTitle": "404 - Page Not Found",
     "NotFoundMessage": "The page you are looking for does not exist."
@@ -18,16 +32,8 @@
       "cityZip": "City / Zip",
       "phone": "Phone",
       "company": "Company",
-      "noItems": "No users found.",
-      "pagination": {
-        "showing": "Showing",
-        "of": "of",
-        "first": "First",
-        "prev": "Prev",
-        "next": "Next",
-        "last": "Last",
-        "page": "Page"
-      }
+      "noItems": "No users found."
+    
     }
   }
 }
